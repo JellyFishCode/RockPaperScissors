@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>Rock Paper Scissors</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<script>
+    function computerPlay(){
+    /*let npcarr = ["ROCK", "PAPER", "SCISSOR"];
+        return npcarr[Math.floor(Math.random()*3)];
+    }           random -> zahl 0 bis 1, x Anzahl Möglichkeiten - 1, floor rundet ab */
+        const number = Math.floor(Math.random() * 1000);
+        if (number % 3 === 0){
+            return "ROCK";
+        }
+        else if (number % 3 === 1){
+            return "PAPER";
+        }
+        else{
+            return "SCISSORS";
+        }
+    }
+    // - Variante die zufälliger ist
+    function game(){
+        for(let i = 1; i <= 5; i++){
+        let result = prompt("Rock, Paper or Scissor. Take your pick!");
+        myPick = result;
+        computerPick = computerPlay();
+        playRound(myPick, computerPick);
+        function playRound(playerSelection, computerSelection){
+            if(playerSelection === "SCISSORS" && computerSelection === "ROCK"){
+                console.log("You Lose! Rock beats Scissor");
+            }
+            else if(playerSelection === "SCISSORS" && computerSelection === "PAPER"){
+                console.log("You Win! Scissor beats Paper");
+            }
+            else if(playerSelection === "SCISSORS" && computerSelection === "SCISSORS"){
+                console.log("It's a draw!");
+            }
+        }
+        }
+    }
+</script>
+</body>
+</html>
