@@ -1,46 +1,71 @@
 <html>
 <head>
-    <title>Rock Paper Scissors</title>
+    <title>Rock Paper Scissors(german)</title>
     <meta charset="UTF-8">
 </head>
 <body>
 <script>
+    var moeglichkeiten = ["schere", "stein", "papier"];
     function computerPlay(){
-    /*let npcarr = ["ROCK", "PAPER", "SCISSOR"];
-        return npcarr[Math.floor(Math.random()*3)];
-    }           random -> zahl 0 bis 1, x Anzahl Möglichkeiten - 1, floor rundet ab */
-        const number = Math.floor(Math.random() * 1000);
-        if (number % 3 === 0){
-            return "ROCK";
+        let nummer = Math.floor(Math.random() * moeglichkeiten.length);
+        switch(nummer){
+            case 0:
+                return "SCHERE";
+            case 1:
+                return "STEIN";
+            case 2:
+                return "PAPIER";
         }
-        else if (number % 3 === 1){
-            return "PAPER";
+    }
+    
+    console.log('In german we use the order Scissors, Rock, Paper, -> Schere, Stein, Papier\nTo play a game type \"playRound();\"');
+
+    function playRound(){
+        let playerScore = 0;
+        let computerScore = 0;
+        do{
+            let eingabe = prompt("Schere, Stein oder Papier!");
+            let spielerAuswahl = eingabe.toUpperCase();
+            let computerAuswahl = computerPlay();
+            if(
+                (spielerAuswahl !== "SCHERE") &&
+                (spielerAuswahl !== "STEIN") &&
+                (spielerAuswahl !== "PAPIER")
+            ){
+                console.log('\"Bitte Schere, Stein oder Papier eingeben.\"');
+            }
+            else{
+                console.log("Ihre Eingabe:\t" + spielerAuswahl + "\nComputerwahl:\t" + computerAuswahl);
+                if(spielerAuswahl === computerAuswahl){
+                console.log("Unentschieden");
+                }
+                if(
+                    (spielerAuswahl === "STEIN" && computerAuswahl === "SCHERE") ||
+                    (spielerAuswahl === "SCHERE" && computerAuswahl === "PAPIER") ||
+                    (spielerAuswahl === "PAPIER" && computerAuswahl === "STEIN")
+                ){
+                    playerScore += 1;
+                    console.log("Du gewinnst die Runde");
+                }
+                if(
+                    (computerAuswahl === "STEIN" && spielerAuswahl === "SCHERE") ||
+                    (computerAuswahl === "SCHERE" && spielerAuswahl === "PAPIER") ||
+                    (computerAuswahl === "PAPIER" && spielerAuswahl === "STEIN")
+                ){
+                    computerScore += 1;
+                    console.log("Du verlierst die Runde");
+                }
+                console.log("Spielstand:\tSpieler " + playerScore + ":" + computerScore + " Computer");
+            }  
+        }
+        while((playerScore < 5) && (computerScore < 5));
+        if(playerScore > computerScore){
+            return "Herzlichen Glückwunsch, Sie haben gewonnen!";
         }
         else{
-            return "SCISSORS";
+            return "Schade, vielleicht klappt es beim nächsten Mal.";
         }
     }
-    // - Variante die zufälliger ist
-    function game(){
-        for(let i = 1; i <= 5; i++){
-        let result = prompt("Rock, Paper or Scissor. Take your pick!");
-        myPick = result;
-        computerPick = computerPlay();
-        playRound(myPick, computerPick);
-        function playRound(playerSelection, computerSelection){
-            if(playerSelection === "SCISSORS" && computerSelection === "ROCK"){
-                console.log("You Lose! Rock beats Scissor");
-            }
-            else if(playerSelection === "SCISSORS" && computerSelection === "PAPER"){
-                console.log("You Win! Scissor beats Paper");
-            }
-            else if(playerSelection === "SCISSORS" && computerSelection === "SCISSORS"){
-                console.log("It's a draw!");
-            }
-        }
-        }
-    }
-    /* edited and ready to push */
-</script>
+    </script>
 </body>
 </html>
